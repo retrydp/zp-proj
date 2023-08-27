@@ -1,0 +1,140 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  line-height: 1.6;
+  font-size: 18px;
+  background-color: #616161;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: #0070f3;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.app-wrapper {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #131313;
+  border-radius: 5px;
+  padding: 10px;
+  width: 320px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.days {
+  display: flex;
+  gap: 1px;
+  flex-wrap: wrap;
+}
+
+.weekLine {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dayNames {
+  display: flex;
+  justify-content: space-between;
+  text-transform: uppercase;
+  color: white;
+  font-size: 15px;
+  background-color: #333333;
+  padding: 5px;
+}
+
+.dayNamesRowItem {
+  cursor: default;
+}
+
+.dayActive {
+  color: #e0e0e0;
+}
+
+.dayInactive {
+  color: #555555;
+}
+
+.singleDay {
+  cursor: default;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+}
+
+.singleDay:hover {
+  border-radius: 10%;
+  background-color: #333333;
+}
+
+.buttonWrapper {
+  display: flex;
+  justify-content: space-between;
+
+  margin-bottom: 25px;
+}
+
+.navigateLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #e0e0e0;
+  border-radius: 10%;
+  background-color: #333333;
+  width: 40px;
+  height: 40px;
+  font-size: 15px;
+}
+
+.navigateLink:hover {
+  text-decoration: none;
+  color: burlywood;
+  background-color: #222222;
+}
+
+.currentDate {
+  display: flex;
+  align-items: center;
+  color: #e3e3e3;
+}
+
+.dateSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.spinner {
+  height: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

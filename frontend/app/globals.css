@@ -54,6 +54,7 @@ img {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 1px 0;
 }
 
 .dayNames {
@@ -63,7 +64,7 @@ img {
   color: white;
   font-size: 15px;
   background-color: #333333;
-  padding: 5px;
+  margin: 5px 0;
 }
 
 .dayNamesRowItem {
@@ -85,17 +86,55 @@ img {
   align-items: center;
   width: 40px;
   height: 40px;
+  border: none;
+  background-color: transparent;
+  font-size: 1rem;
+  position: relative;
 }
 
-.singleDay:hover {
+.badge {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 9px;
+  font-weight: bold;
+}
+
+.badge-primary {
+  background-color: rgb(255, 171, 122);
+  top: 2px;
+  left: 2px;
+  color: white;
+}
+
+.badge-secondary {
+  background-color: lightgreen;
+  top: 2px;
+  right: 2px;
+  color: black;
+}
+
+.badge-payed {
+  bottom: 2px;
+  left: 2px;
+  color: yellowgreen;
+}
+
+.singleDay:hover:not(.dayInactive),
+.singleDay:focus:not(.dayInactive) {
   border-radius: 10%;
   background-color: #333333;
+  color: burlywood;
+  cursor: pointer;
 }
 
 .buttonWrapper {
   display: flex;
   justify-content: space-between;
-
   margin-bottom: 25px;
 }
 
@@ -124,6 +163,7 @@ img {
   display: flex;
   align-items: center;
   color: #e3e3e3;
+  text-transform: uppercase;
 }
 
 .dateSection {
@@ -137,4 +177,94 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.hasData {
+  background-color: cadetblue;
+  border-radius: 5px;
+}
+
+.bottomBlock {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+  margin: 15px 0;
+}
+
+.buttonBlock {
+  display: flex;
+}
+.bBlockChosen,
+.workPlace {
+  font-size: 15px;
+}
+
+.labelComment {
+  font-size: 15px;
+}
+
+#comment {
+  background-color: transparent;
+  border: 1px solid cadetblue;
+  border-radius: 3px;
+  width: 100%;
+  resize: vertical;
+  color: white;
+}
+
+.bBlockIsWork {
+  color: cadetblue;
+  font-size: 15px;
+}
+
+.isWorkDayWrapper {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  flex-flow: row-reverse;
+}
+
+#isWorkDayCheckbox:checked + label {
+  color: green;
+}
+
+.workPlaceWrapper {
+  display: flex;
+  column-gap: 10px;
+  color: white;
+  font-size: 15px;
+}
+
+#workPlaceInput {
+  background-color: transparent;
+  border: 1px solid cadetblue;
+  border-radius: 3px;
+}
+
+.bBlockSubmit {
+  border-color: transparent;
+  box-shadow: 0px 10px 14px -7px #276873;
+  background: linear-gradient(to bottom, cadetblue 5%, #408c99 100%);
+  background-color: #599bb3;
+  border-radius: 8px;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 13px 32px;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #3d768a;
+}
+
+.bBlockSubmit:hover {
+  background: linear-gradient(to bottom, #408c99 5%, #599bb3 100%);
+  background-color: #408c99;
+}
+
+.bBlockSubmit:active {
+  position: relative;
+  top: 1px;
 }

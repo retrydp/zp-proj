@@ -26,13 +26,14 @@ const findOne = (date) => {
 };
 
 const addOne = (userData) => {
-  const { date } = userData;
-  const { id, type, comment, salary, workplace } = userData.values;
-  
+  const { date, values } = userData;
+  const { id, type, comment, salary, workplace } = values;
+
   const dataMap = getData();
   dataMap.set(date, userData.values);
   const serialized = v8.serialize(dataMap);
-  storeData(serialized);
+  // storeData(serialized);
+
   return successRequest(date);
 };
 

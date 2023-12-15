@@ -18,11 +18,13 @@ const zpController = (req, res) => {
   appEmitter.on('success', (code, data) => {
     res.statusCode = code;
     res.end(JSON.stringify({ success: true, payload: data }));
+    return;
   });
 
   appEmitter.on('failure', (code, data) => {
     res.statusCode = code;
     res.end(JSON.stringify({ success: false, payload: data }));
+    return;
   });
 
   useMethod ? useMethod(req) : wrongRequest(400, 'wrong method');

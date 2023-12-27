@@ -1,18 +1,9 @@
-// putValidator.js
-const { addOne } = require('../zp/zp.service');
-const wrongRequest = require('./wrongRequest');
-const dateParamValidator = require('./dateParamValidator');
+// postValidator.js
+const { addOne } = require('../../zp/zp.service');
+const wrongRequest = require('../wrongRequest');
+const { dateParamValidation, isJsonString } = require('../helpers');
 
-const isJsonString = (str) => {
-  try {
-    JSON.parse(str);
-    return true;
-  } catch (e) {
-    return false;
-  }
-};
-
-const putValidator = (req) => {
+const postValidator = (req) => {
   let body = '';
 
   req.on('data', (data) => {
@@ -30,7 +21,7 @@ const putValidator = (req) => {
     const parsed = JSON.parse(body);
     const date = parsed?.date;
 
-    if (!dateParamValidator(date) || !date) {
+    if (!dateParamValidation(date) || !date) {
       return wrongRequest(400, 'Invalid date format received');
     }
 
@@ -51,7 +42,7 @@ const putValidator = (req) => {
     const { id } = values;
     const checkSameMonth = id.replace(/-\d+$/, '') === date;
 
-    if (!dateParamValidator(id, 'YYYY-MM-DD') || !checkSameMonth) {
+    if (!dateParamValidation(id, 'YYYY-MM-DD') || !checkSameMonth) {
       return wrongRequest(400, 'Invalid date format for Id');
     }
 
@@ -59,4 +50,4 @@ const putValidator = (req) => {
   });
 };
 
-module.exports = putValidator;
+module.exports = postValidator;

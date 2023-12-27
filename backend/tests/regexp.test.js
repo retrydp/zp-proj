@@ -1,4 +1,4 @@
-const regexp = require('../src/utils/dateParamValidator');
+const { dateParamValidation: regexp } = require('../src/utils/helpers');
 
 describe('Regexp test', () => {
   test(`Valid date YYYY-MM-DD`, () => {

@@ -4,16 +4,17 @@ const path = require('path');
 const fs = require('fs');
 const v8 = require('v8');
 
+const dbPath = path.join(__dirname, '..', 'data', 'salary.v8data');
+
 const getData = () => {
-  const rawData = fs.readFileSync(
-    path.join(__dirname, '..', 'data', 'salary.v8data')
-  );
+  const rawData = fs.readFileSync(dbPath);
   const dateMap = v8.deserialize(rawData);
   return dateMap;
 };
 
 const storeData = (data) => {
-  fs.writeFileSync(path.join(__dirname, '..', 'data', 'salary.v8data'), data);
+  const serialized = v8.serialize(data);
+  fs.writeFileSync(dbPath, serialized);
 };
 
 const findOne = (date) => {
@@ -27,14 +28,54 @@ const findOne = (date) => {
 
 const addOne = (userData) => {
   const { date, values } = userData;
-  const { id, type, comment, salary, workplace } = values;
-
+  const { id } = values;
   const dataMap = getData();
-  dataMap.set(date, userData.values);
-  const serialized = v8.serialize(dataMap);
-  // storeData(serialized);
+  const dateArray = dataMap.get(date);
 
-  return successRequest(date);
+  if (!Array.isArray(dateArray)) {
+    dataMap.set(date, [values]);
+    storeData(dataMap);
+    return successRequest(values);
+  }
+
+  const dayObj = dateArray.find((day) => day.id === id);
+
+  if (!dayObj) {
+    dateArray.push(values);
+    dataMap.set(date, dateArray);
+  } else {
+    const updatedDateArray = dateArray.map((el) =>
+      el.id === id ? values : el
+    );
+    dataMap.set(date, updatedDateArray);
+  }
+
+  storeData(dataMap);
+
+  return successRequest(values);
 };
 
-module.exports = { findOne, addOne };
+const deleteOne = (userData) => {
+  const { date, id } = userData;
+  const dataMap = getData();
+  const dateArray = dataMap.get(date);
+
+  if (!dateArray) {
+    return wrongRequest(404, 'No such date in the database.');
+  }
+
+  const dayObj = dateArray.find((day) => day.id === id);
+
+  if (!dayObj) {
+    return wrongRequest(404, 'No such date in the database.');
+  }
+
+  const updatedDateArray = dateArray.filter((el) => el.id !== id);
+
+  dataMap.set(date, updatedDateArray);
+  storeData(dataMap);
+
+  return successRequest(`${id} successfully deleted.`);
+};
+
+module.exports = { findOne, addOne, deleteOne };

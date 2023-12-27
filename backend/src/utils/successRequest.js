@@ -1,4 +1,4 @@
-const appEmitter = require('./appEmitter');
+const appEmitter = require('./helpers/appEmitter');
 
 const successRequest = ( data) => {
   appEmitter.emit('success', 200, data);

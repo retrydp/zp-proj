@@ -8,12 +8,12 @@ require('dayjs/locale/ru');
 export interface TArray {
   day: number;
   active: boolean;
-  data?: {
+  data: {
     id: string;
     payed: boolean;
     comment: string;
     workplace: string;
-  };
+  } | null;
 }
 export const Main = () => {
   const dateInUrl = useSearchParams().get('date');
@@ -58,6 +58,7 @@ export const Main = () => {
         .subtract(idx, 'day')
         .date(),
       active: false,
+      data: null,
     })).reverse();
     const main = Array.from({ length: daysCount }, (_, idx) => ({
       day: idx + 1,
@@ -69,7 +70,7 @@ export const Main = () => {
       {
         length: weekRows * weekDayName.length - daysCount - head.length,
       },
-      (_, idx) => ({ day: idx + 1, active: false })
+      (_, idx) => ({ day: idx + 1, active: false, data:null })
     );
     return [...head, ...main, ...tail];
   };
